@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Award, Certificate, FileImage, ExternalLink, Github, Calendar, MapPin } from 'lucide-react';
+import { Award, FileText, FileImage, ExternalLink, Github, Calendar, MapPin } from 'lucide-react';
 
 const Index = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -22,7 +21,7 @@ const Index = () => {
     },
     {
       id: 2,
-      title: "Task Management App",
+      title: "Task Management App", 
       description: "Collaborative task management with real-time updates",
       image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
       technologies: ["Vue.js", "Firebase", "Tailwind"],
@@ -235,7 +234,7 @@ const Index = () => {
                       />
                       <div className="absolute top-4 right-4">
                         <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                          <Certificate className="w-5 h-5 text-white" />
+                          <FileText className="w-5 h-5 text-white" />
                         </div>
                       </div>
                     </div>
