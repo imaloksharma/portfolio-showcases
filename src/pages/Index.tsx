@@ -3,6 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Award, FileText, FileImage, ExternalLink, Github, Calendar, MapPin, Grid3X3, Eye } from 'lucide-react';
+import NavigationTabs from '@/components/NavigationTabs';
+import CommunitySection from '@/components/CommunitySection';
+import MemoryImagesSection from '@/components/MemoryImagesSection';
 
 const Index = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -375,6 +378,363 @@ const Index = () => {
     }
   ];
 
+  // Projects Section Component
+  const ProjectsSection = () => (
+    <div className="py-20 px-4">
+      <div className="container mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+            Featured Projects
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            A collection of my most impactful and innovative development projects
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <Card key={project.id} className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-white/80 backdrop-blur-sm border-0 shadow-lg">
+              <div className="relative overflow-hidden rounded-t-lg">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-4 left-4 right-4 flex gap-2">
+                    <button className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
+                      <Github className="w-5 h-5 text-white" />
+                    </button>
+                    <button className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
+                      <ExternalLink className="w-5 h-5 text-white" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-xl font-bold text-gray-800">{project.title}</h3>
+                  <Badge variant="outline" className="text-sm">{project.date}</Badge>
+                </div>
+                <p className="text-gray-600 mb-4">{project.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <Badge key={tech} variant="secondary" className="text-xs">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  // Grid Posts Section Component
+  const GridPostsSection = () => (
+    <div className="py-20 px-4 bg-gradient-to-r from-purple-50 to-pink-50">
+      <div className="container mx-auto">
+        <div className="text-center mb-16">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Grid3X3 className="w-8 h-8 text-purple-600" />
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800">
+              Project Gallery
+            </h2>
+          </div>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Explore my diverse portfolio through an interactive 4x4 grid showcase
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {gridPosts.map((post, index) => (
+            <Dialog key={post.id}>
+              <DialogTrigger asChild>
+                <div className="group relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                  <div className="aspect-square relative">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <h3 className="font-bold text-sm mb-1">{post.title}</h3>
+                        <div className="flex items-center justify-between text-xs">
+                          <Badge variant="secondary" className="text-xs px-2 py-1">
+                            {post.category}
+                          </Badge>
+                          <div className="flex items-center gap-1">
+                            <Eye className="w-3 h-3" />
+                            <span>{post.views}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="absolute top-2 right-2 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <ExternalLink className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
+                </div>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl">
+                <div className="p-4">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full rounded-lg mb-6"
+                  />
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-2xl font-bold">{post.title}</h3>
+                      <Badge variant="outline">{post.category}</Badge>
+                    </div>
+                    <p className="text-gray-600">
+                      This is a detailed view of the {post.title.toLowerCase()} project. 
+                      Click the external link to view more details or visit the live demo.
+                    </p>
+                    <div className="flex items-center gap-4 text-sm text-gray-500">
+                      <div className="flex items-center gap-2">
+                        <Eye className="w-4 h-4" />
+                        <span>{post.views} views</span>
+                      </div>
+                      <div className="flex gap-2">
+                        <button className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">
+                          <Github className="w-4 h-4" />
+                        </button>
+                        <button className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">
+                          <ExternalLink className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  // Certificate Grid Section Component  
+  const CertificateGridSection = () => (
+    <div className="py-20 px-4 bg-gradient-to-r from-emerald-50 via-teal-50 to-cyan-50 relative">
+      {/* Floating elements for innovation */}
+      <div className="absolute top-10 left-10 w-6 h-6 bg-emerald-300/50 rounded-full animate-bounce"></div>
+      <div className="absolute top-20 right-20 w-4 h-4 bg-teal-300/50 rounded-full animate-pulse"></div>
+      <div className="absolute bottom-20 left-1/4 w-8 h-8 bg-cyan-300/50 rounded-full animate-bounce"></div>
+      
+      <div className="container mx-auto relative">
+        <div className="text-center mb-16">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <FileText className="w-8 h-8 text-emerald-600 animate-pulse" />
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800">
+              Certificate Gallery
+            </h2>
+          </div>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Professional certifications and credentials showcased in an interactive 4x4 grid
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {certificateGrid.map((cert, index) => (
+            <Dialog key={cert.id}>
+              <DialogTrigger asChild>
+                <div className="group relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                  <div className="aspect-square relative">
+                    <img
+                      src={cert.image}
+                      alt={cert.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <h3 className="font-bold text-sm mb-1 truncate">{cert.title}</h3>
+                        <p className="text-xs opacity-90 mb-2 truncate">{cert.issuer}</p>
+                        <div className="flex items-center justify-between text-xs">
+                          <Badge variant="secondary" className="text-xs px-2 py-1">
+                            {cert.category}
+                          </Badge>
+                          <div className="flex items-center gap-1">
+                            <Eye className="w-3 h-3" />
+                            <span>{cert.views}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="absolute top-2 right-2 w-8 h-8 bg-emerald-500/80 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <FileText className="w-4 h-4 text-white" />
+                    </div>
+                    <div className="absolute top-2 left-2 px-2 py-1 bg-black/50 backdrop-blur-sm rounded text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {cert.date}
+                    </div>
+                  </div>
+                </div>
+              </DialogTrigger>
+              <DialogContent className="max-w-3xl">
+                <div className="p-6">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center">
+                      <FileText className="w-8 h-8 text-emerald-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-gray-800">{cert.title}</h3>
+                      <p className="text-gray-600">{cert.issuer}</p>
+                    </div>
+                  </div>
+                  <img
+                    src={cert.image}
+                    alt={cert.title}
+                    className="w-full rounded-lg mb-6 shadow-lg"
+                  />
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                    <div className="text-center p-3 bg-gray-50 rounded-lg">
+                      <p className="font-semibold text-gray-800">Category</p>
+                      <p className="text-gray-600">{cert.category}</p>
+                    </div>
+                    <div className="text-center p-3 bg-gray-50 rounded-lg">
+                      <p className="font-semibold text-gray-800">Issued</p>
+                      <p className="text-gray-600">{cert.date}</p>
+                    </div>
+                    <div className="text-center p-3 bg-gray-50 rounded-lg">
+                      <p className="font-semibold text-gray-800">Views</p>
+                      <p className="text-gray-600">{cert.views}</p>
+                    </div>
+                    <div className="text-center p-3 bg-gray-50 rounded-lg">
+                      <p className="font-semibold text-gray-800">Credential ID</p>
+                      <p className="text-gray-600 text-xs">{cert.credentialId}</p>
+                    </div>
+                  </div>
+                  <div className="mt-6 flex justify-center gap-3">
+                    <button className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors flex items-center gap-2">
+                      <ExternalLink className="w-4 h-4" />
+                      Verify Certificate
+                    </button>
+                    <button className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors flex items-center gap-2">
+                      <FileImage className="w-4 h-4" />
+                      Download
+                    </button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  // Achievements Section Component
+  const AchievementsSection = () => (
+    <div className="py-20 px-4 bg-gradient-to-r from-amber-50 to-orange-50">
+      <div className="container mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+            Achievements & Recognition
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Milestones and recognitions that mark my professional journey
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {achievements.map((achievement, index) => (
+            <Card key={achievement.id} className="group hover:shadow-xl transition-all duration-300 bg-white border-0 shadow-md">
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Award className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-3">{achievement.title}</h3>
+                <p className="text-gray-600 mb-4">{achievement.description}</p>
+                <div className="space-y-2 text-sm text-gray-500">
+                  <div className="flex items-center justify-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    <span>{achievement.date}</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-2">
+                    <MapPin className="w-4 h-4" />
+                    <span>{achievement.location}</span>
+                  </div>
+                </div>
+                <Badge variant="outline" className="mt-4">
+                  {achievement.organization}
+                </Badge>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  // Certificates Section Component
+  const CertificatesSection = () => (
+    <div className="py-20 px-4">
+      <div className="container mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+            Professional Certificates
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Verified credentials and certifications in cutting-edge technologies
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {certificates.map((certificate, index) => (
+            <Dialog key={certificate.id}>
+              <DialogTrigger asChild>
+                <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm border-0 shadow-lg">
+                  <div className="relative overflow-hidden rounded-t-lg">
+                    <img
+                      src={certificate.image}
+                      alt={certificate.title}
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-4 right-4">
+                      <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                        <FileText className="w-5 h-5 text-white" />
+                      </div>
+                    </div>
+                  </div>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="text-lg font-bold text-gray-800">{certificate.title}</h3>
+                      <Badge variant="outline" className="text-sm">{certificate.date}</Badge>
+                    </div>
+                    <p className="text-gray-600 mb-3">{certificate.issuer}</p>
+                    <p className="text-sm text-gray-500">ID: {certificate.credentialId}</p>
+                  </CardContent>
+                </Card>
+              </DialogTrigger>
+              <DialogContent className="max-w-3xl">
+                <div className="p-4">
+                  <img
+                    src={certificate.image}
+                    alt={certificate.title}
+                    className="w-full rounded-lg"
+                  />
+                  <div className="mt-6 text-center space-y-2">
+                    <h3 className="text-2xl font-bold">{certificate.title}</h3>
+                    <p className="text-lg text-gray-600">{certificate.issuer}</p>
+                    <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
+                      <span>Issued: {certificate.date}</span>
+                      <span>ID: {certificate.credentialId}</span>
+                    </div>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden">
       {/* Floating Bubbles Background */}
@@ -411,354 +771,16 @@ const Index = () => {
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-slate-50 to-transparent"></div>
       </section>
 
-      {/* Projects Section */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              Featured Projects
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              A collection of my most impactful and innovative development projects
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <Card key={project.id} className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-                <div className="relative overflow-hidden rounded-t-lg">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-4 left-4 right-4 flex gap-2">
-                      <button className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
-                        <Github className="w-5 h-5 text-white" />
-                      </button>
-                      <button className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
-                        <ExternalLink className="w-5 h-5 text-white" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-xl font-bold text-gray-800">{project.title}</h3>
-                    <Badge variant="outline" className="text-sm">{project.date}</Badge>
-                  </div>
-                  <p className="text-gray-600 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <Badge key={tech} variant="secondary" className="text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* New 4x4 Grid Posts Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-purple-50 to-pink-50">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Grid3X3 className="w-8 h-8 text-purple-600" />
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-800">
-                Project Gallery
-              </h2>
-            </div>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Explore my diverse portfolio through an interactive 4x4 grid showcase
-            </p>
-          </div>
-          
-          {/* 4x4 Grid Layout */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {gridPosts.map((post, index) => (
-              <Dialog key={post.id}>
-                <DialogTrigger asChild>
-                  <div className="group relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                    <div className="aspect-square relative">
-                      <img
-                        src={post.image}
-                        alt={post.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                          <h3 className="font-bold text-sm mb-1">{post.title}</h3>
-                          <div className="flex items-center justify-between text-xs">
-                            <Badge variant="secondary" className="text-xs px-2 py-1">
-                              {post.category}
-                            </Badge>
-                            <div className="flex items-center gap-1">
-                              <Eye className="w-3 h-3" />
-                              <span>{post.views}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="absolute top-2 right-2 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <ExternalLink className="w-4 h-4 text-white" />
-                      </div>
-                    </div>
-                  </div>
-                </DialogTrigger>
-                <DialogContent className="max-w-2xl">
-                  <div className="p-4">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full rounded-lg mb-6"
-                    />
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-2xl font-bold">{post.title}</h3>
-                        <Badge variant="outline">{post.category}</Badge>
-                      </div>
-                      <p className="text-gray-600">
-                        This is a detailed view of the {post.title.toLowerCase()} project. 
-                        Click the external link to view more details or visit the live demo.
-                      </p>
-                      <div className="flex items-center gap-4 text-sm text-gray-500">
-                        <div className="flex items-center gap-2">
-                          <Eye className="w-4 h-4" />
-                          <span>{post.views} views</span>
-                        </div>
-                        <div className="flex gap-2">
-                          <button className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">
-                            <Github className="w-4 h-4" />
-                          </button>
-                          <button className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">
-                            <ExternalLink className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* New 4x4 Certificate Grid Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-emerald-50 via-teal-50 to-cyan-50 relative">
-        {/* Floating elements for innovation */}
-        <div className="absolute top-10 left-10 w-6 h-6 bg-emerald-300/50 rounded-full animate-bounce"></div>
-        <div className="absolute top-20 right-20 w-4 h-4 bg-teal-300/50 rounded-full animate-pulse"></div>
-        <div className="absolute bottom-20 left-1/4 w-8 h-8 bg-cyan-300/50 rounded-full animate-bounce"></div>
-        
-        <div className="container mx-auto relative">
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <FileText className="w-8 h-8 text-emerald-600 animate-pulse" />
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-800">
-                Certificate Gallery
-              </h2>
-            </div>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Professional certifications and credentials showcased in an interactive 4x4 grid
-            </p>
-          </div>
-          
-          {/* 4x4 Certificate Grid Layout */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {certificateGrid.map((cert, index) => (
-              <Dialog key={cert.id}>
-                <DialogTrigger asChild>
-                  <div className="group relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                    <div className="aspect-square relative">
-                      <img
-                        src={cert.image}
-                        alt={cert.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                          <h3 className="font-bold text-sm mb-1 truncate">{cert.title}</h3>
-                          <p className="text-xs opacity-90 mb-2 truncate">{cert.issuer}</p>
-                          <div className="flex items-center justify-between text-xs">
-                            <Badge variant="secondary" className="text-xs px-2 py-1">
-                              {cert.category}
-                            </Badge>
-                            <div className="flex items-center gap-1">
-                              <Eye className="w-3 h-3" />
-                              <span>{cert.views}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="absolute top-2 right-2 w-8 h-8 bg-emerald-500/80 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <FileText className="w-4 h-4 text-white" />
-                      </div>
-                      <div className="absolute top-2 left-2 px-2 py-1 bg-black/50 backdrop-blur-sm rounded text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        {cert.date}
-                      </div>
-                    </div>
-                  </div>
-                </DialogTrigger>
-                <DialogContent className="max-w-3xl">
-                  <div className="p-6">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center">
-                        <FileText className="w-8 h-8 text-emerald-600" />
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-bold text-gray-800">{cert.title}</h3>
-                        <p className="text-gray-600">{cert.issuer}</p>
-                      </div>
-                    </div>
-                    <img
-                      src={cert.image}
-                      alt={cert.title}
-                      className="w-full rounded-lg mb-6 shadow-lg"
-                    />
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                      <div className="text-center p-3 bg-gray-50 rounded-lg">
-                        <p className="font-semibold text-gray-800">Category</p>
-                        <p className="text-gray-600">{cert.category}</p>
-                      </div>
-                      <div className="text-center p-3 bg-gray-50 rounded-lg">
-                        <p className="font-semibold text-gray-800">Issued</p>
-                        <p className="text-gray-600">{cert.date}</p>
-                      </div>
-                      <div className="text-center p-3 bg-gray-50 rounded-lg">
-                        <p className="font-semibold text-gray-800">Views</p>
-                        <p className="text-gray-600">{cert.views}</p>
-                      </div>
-                      <div className="text-center p-3 bg-gray-50 rounded-lg">
-                        <p className="font-semibold text-gray-800">Credential ID</p>
-                        <p className="text-gray-600 text-xs">{cert.credentialId}</p>
-                      </div>
-                    </div>
-                    <div className="mt-6 flex justify-center gap-3">
-                      <button className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors flex items-center gap-2">
-                        <ExternalLink className="w-4 h-4" />
-                        Verify Certificate
-                      </button>
-                      <button className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors flex items-center gap-2">
-                        <FileImage className="w-4 h-4" />
-                        Download
-                      </button>
-                    </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Achievements Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-amber-50 to-orange-50">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              Achievements & Recognition
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Milestones and recognitions that mark my professional journey
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {achievements.map((achievement, index) => (
-              <Card key={achievement.id} className="group hover:shadow-xl transition-all duration-300 bg-white border-0 shadow-md">
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <Award className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">{achievement.title}</h3>
-                  <p className="text-gray-600 mb-4">{achievement.description}</p>
-                  <div className="space-y-2 text-sm text-gray-500">
-                    <div className="flex items-center justify-center gap-2">
-                      <Calendar className="w-4 h-4" />
-                      <span>{achievement.date}</span>
-                    </div>
-                    <div className="flex items-center justify-center gap-2">
-                      <MapPin className="w-4 h-4" />
-                      <span>{achievement.location}</span>
-                    </div>
-                  </div>
-                  <Badge variant="outline" className="mt-4">
-                    {achievement.organization}
-                  </Badge>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Certificates Section */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              Professional Certificates
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Verified credentials and certifications in cutting-edge technologies
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {certificates.map((certificate, index) => (
-              <Dialog key={certificate.id}>
-                <DialogTrigger asChild>
-                  <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 bg-white/90 backdrop-blur-sm border-0 shadow-lg">
-                    <div className="relative overflow-hidden rounded-t-lg">
-                      <img
-                        src={certificate.image}
-                        alt={certificate.title}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute top-4 right-4">
-                        <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                          <FileText className="w-5 h-5 text-white" />
-                        </div>
-                      </div>
-                    </div>
-                    <CardContent className="p-6">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-lg font-bold text-gray-800">{certificate.title}</h3>
-                        <Badge variant="outline" className="text-sm">{certificate.date}</Badge>
-                      </div>
-                      <p className="text-gray-600 mb-3">{certificate.issuer}</p>
-                      <p className="text-sm text-gray-500">ID: {certificate.credentialId}</p>
-                    </CardContent>
-                  </Card>
-                </DialogTrigger>
-                <DialogContent className="max-w-3xl">
-                  <div className="p-4">
-                    <img
-                      src={certificate.image}
-                      alt={certificate.title}
-                      className="w-full rounded-lg"
-                    />
-                    <div className="mt-6 text-center space-y-2">
-                      <h3 className="text-2xl font-bold">{certificate.title}</h3>
-                      <p className="text-lg text-gray-600">{certificate.issuer}</p>
-                      <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
-                        <span>Issued: {certificate.date}</span>
-                        <span>ID: {certificate.credentialId}</span>
-                      </div>
-                    </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Navigation Tabs with all sections */}
+      <NavigationTabs
+        projectsSection={<ProjectsSection />}
+        gridPostsSection={<GridPostsSection />}
+        certificateGridSection={<CertificateGridSection />}
+        achievementsSection={<AchievementsSection />}
+        certificatesSection={<CertificatesSection />}
+        communitySection={<CommunitySection />}
+        memoryImagesSection={<MemoryImagesSection />}
+      />
 
       {/* Enhanced Call to Action with Innovation Structure */}
       <section className="py-20 px-4 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white relative overflow-hidden">
