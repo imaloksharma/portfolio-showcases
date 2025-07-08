@@ -8,21 +8,21 @@ const MemoryImagesSection = () => {
   const memoryImages = [
     {
       id: 1,
-      title: "Tech Conference 2024",
-      location: "San Francisco, CA",
-      date: "March 2024",
-      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=400&fit=crop",
+      title: "Tech Meet Up",
+      location: "Amritsar, Punjab",
+      date: "July 2025",
+      image: "/images/image1.jpeg", // Updated to a valid image URL
       description: "Amazing keynote about AI and future of technology",
       likes: "127",
       category: "Professional"
     },
     {
       id: 2,
-      title: "Team Building Retreat",
-      location: "Lake Tahoe, CA",
-      date: "February 2024",
-      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=400&fit=crop",
-      description: "Great bonding experience with the development team",
+      title: "Website Launch Party",
+      location: "Delhi, India",
+      date: "July 2024",
+      image: "/images/nitdelhifav.jpeg", // Updated to a valid image URL
+      description: "Great bonding experience with the Nit delhi directors and team of faculty members",
       likes: "89",
       category: "Team"
     },
