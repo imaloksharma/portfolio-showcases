@@ -34,12 +34,12 @@ const Index = () => {
     },
     {
       id: 3,
-      title: "Data Visualization Dashboard",
-      description: "Interactive dashboard for business analytics",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop",
+      title: "Track Ias Website",
+      description: "LMS for IAS aspirants with React and Node.js",
+      image: "/images/trackias.png", // Make sure this image exists in the public/images folder
       technologies: ["React", "D3.js", "Python", "Flask"],
-      githubUrl: "#",
-      liveUrl: "#",
+      githubUrl: "https://trackias.in/",
+      liveUrl: "https://trackias.in/",
       date: "2023"
     }
   ];
