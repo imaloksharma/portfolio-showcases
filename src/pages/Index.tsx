@@ -25,10 +25,10 @@ const Index = () => {
     {
       id: 2,
       title: "Khalsa College of Eng and Tech Website", 
-      description: "Collaborative task management with real-time updates",
-      image: "kcet.png",
-      technologies: ["wordpress", "Firebase", "Html", "CSS", "JavaScript"  ],
-      githubUrl: "https://wwww.kcet.ac.in/",
+      description: "College website with WordPress and Firebase integration",
+      image: "/images/kcet.png", // Make sure this image exists in the public/images folder
+      technologies: ["WordPress", "Firebase", "HTML", "CSS", "JavaScript"],
+      githubUrl: "https://github.com/your-github-repo", // Replace with actual GitHub repo if available
       liveUrl: "https://www.kcet.ac.in/",
       date: "2022"
     },
@@ -402,12 +402,28 @@ const Index = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-4 left-4 right-4 flex gap-2">
-                    <button className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
-                      <Github className="w-5 h-5 text-white" />
-                    </button>
-                    <button className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors">
-                      <ExternalLink className="w-5 h-5 text-white" />
-                    </button>
+                    {project.githubUrl && project.githubUrl !== "#" && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
+                        aria-label="View on GitHub"
+                      >
+                        <Github className="w-5 h-5 text-white" />
+                      </a>
+                    )}
+                    {project.liveUrl && project.liveUrl !== "#" && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
+                        aria-label="View Live Site"
+                      >
+                        <ExternalLink className="w-5 h-5 text-white" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
