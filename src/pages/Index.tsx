@@ -14,23 +14,23 @@ const Index = () => {
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
+      title: "Nit Delhi Website",
       description: "Full-stack e-commerce solution with React, Node.js, and MongoDB",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+      image: "/images/nitdelhi.png", // Make sure this image exists in the public/images folder
+      technologies: ["React", "Node.js", "MongoDB", "Wordpress"],
       githubUrl: "#",
-      liveUrl: "#",
+      liveUrl: "https://nitdelhi.ac.in/",
       date: "2024"
     },
     {
       id: 2,
-      title: "Task Management App", 
+      title: "Khalsa College of Eng and Tech Website", 
       description: "Collaborative task management with real-time updates",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
-      technologies: ["Vue.js", "Firebase", "Tailwind"],
-      githubUrl: "#",
-      liveUrl: "#",
-      date: "2023"
+      image: "kcet.png",
+      technologies: ["wordpress", "Firebase", "Html", "CSS", "JavaScript"  ],
+      githubUrl: "https://wwww.kcet.ac.in/",
+      liveUrl: "https://www.kcet.ac.in/",
+      date: "2022"
     },
     {
       id: 3,
