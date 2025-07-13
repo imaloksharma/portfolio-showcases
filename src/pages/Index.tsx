@@ -378,6 +378,86 @@ const Index = () => {
     }
   ];
 
+  // About Me Section Component
+  const AboutMeSection = () => (
+    <div className="py-8 md:py-20 px-2 md:px-4 bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+      <div className="container mx-auto max-w-6xl">
+        <div className="text-center mb-8 md:mb-16">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-2 md:mb-4">
+            About Me
+          </h2>
+          <p className="text-sm md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
+            Passionate developer, educator, and technology enthusiast
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+          {/* Professional Image */}
+          <div className="order-2 lg:order-1">
+            <div className="relative group">
+              <div className="absolute -inset-4 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+              <div className="relative">
+                <img
+                  src="/lovable-uploads/485224af-5497-4399-b3d3-f5c5b67e6ad9.png"
+                  alt="Professional presentation"
+                  className="w-full h-auto rounded-2xl shadow-2xl object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+              </div>
+            </div>
+          </div>
+          
+          {/* About Content */}
+          <div className="order-1 lg:order-2 space-y-4 md:space-y-6">
+            <div className="prose prose-lg text-gray-700 max-w-none">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-3 md:mb-4">
+                Full Stack Developer & Tech Educator
+              </h3>
+              
+              <p className="text-sm md:text-base leading-relaxed mb-4">
+                I'm a passionate full-stack developer with expertise in modern web technologies and a dedication to sharing knowledge through education and mentorship. With extensive experience in React, Node.js, and cloud technologies, I've successfully delivered innovative solutions for educational institutions and businesses.
+              </p>
+              
+              <p className="text-sm md:text-base leading-relaxed mb-4">
+                As an active community contributor and educator, I regularly conduct workshops, technical sessions, and mentoring programs to help aspiring developers grow in their careers. My work spans across web development, cloud architecture, and educational technology.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-3 md:p-4 shadow-sm">
+                  <h4 className="font-semibold text-gray-800 text-sm md:text-base mb-2">Specialties</h4>
+                  <ul className="text-xs md:text-sm text-gray-600 space-y-1">
+                    <li>• Full Stack Development</li>
+                    <li>• Cloud Architecture</li>
+                    <li>• Technical Education</li>
+                    <li>• Team Leadership</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-white/60 backdrop-blur-sm rounded-lg p-3 md:p-4 shadow-sm">
+                  <h4 className="font-semibold text-gray-800 text-sm md:text-base mb-2">Technologies</h4>
+                  <ul className="text-xs md:text-sm text-gray-600 space-y-1">
+                    <li>• React & Node.js</li>
+                    <li>• AWS & Cloud Services</li>
+                    <li>• MongoDB & SQL</li>
+                    <li>• WordPress & CMS</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="flex flex-wrap gap-2 mt-6">
+                {['React', 'Node.js', 'AWS', 'MongoDB', 'WordPress', 'JavaScript', 'Python', 'Cloud Architecture'].map((tech) => (
+                  <Badge key={tech} variant="secondary" className="text-xs px-2 py-1">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   // Projects Section Component
   const ProjectsSection = () => (
       <div className="py-8 md:py-20 px-2 md:px-4">
@@ -789,6 +869,7 @@ const Index = () => {
 
       {/* Navigation Tabs with all sections */}
       <NavigationTabs
+        aboutSection={<AboutMeSection />}
         projectsSection={<ProjectsSection />}
         gridPostsSection={<GridPostsSection />}
         certificateGridSection={<CertificateGridSection />}

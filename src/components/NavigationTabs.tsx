@@ -11,6 +11,7 @@ import {
 import { Users, Award, FileText, Camera, Briefcase, Menu, Home, ExternalLink } from 'lucide-react';
 
 interface NavigationTabsProps {
+  aboutSection: React.ReactNode;
   projectsSection: React.ReactNode;
   gridPostsSection: React.ReactNode;
   certificateGridSection: React.ReactNode;
@@ -21,6 +22,7 @@ interface NavigationTabsProps {
 }
 
 const NavigationTabs: React.FC<NavigationTabsProps> = ({
+  aboutSection,
   projectsSection,
   gridPostsSection,
   certificateGridSection,
@@ -29,9 +31,10 @@ const NavigationTabs: React.FC<NavigationTabsProps> = ({
   communitySection,
   memoryImagesSection
 }) => {
-  const [activeTab, setActiveTab] = useState("projects");
+  const [activeTab, setActiveTab] = useState("about");
 
   const tabs = [
+    { value: "about", label: "About Me", icon: Users },
     { value: "projects", label: "Projects", icon: Briefcase },
     { value: "gallery", label: "Gallery", icon: Award },
     { value: "certificates", label: "Certificates", icon: FileText },
@@ -112,7 +115,7 @@ const NavigationTabs: React.FC<NavigationTabsProps> = ({
           </div>
 
           {/* Desktop Navigation */}
-          <TabsList className="hidden md:grid w-full grid-cols-4 lg:grid-cols-7 mb-12 h-auto p-2 bg-white/80 backdrop-blur-sm shadow-lg rounded-xl gap-1">
+          <TabsList className="hidden md:grid w-full grid-cols-4 lg:grid-cols-8 mb-12 h-auto p-2 bg-white/80 backdrop-blur-sm shadow-lg rounded-xl gap-1">
             {tabs.map((tab) => (
               <TabsTrigger 
                 key={tab.value}
@@ -125,6 +128,10 @@ const NavigationTabs: React.FC<NavigationTabsProps> = ({
               </TabsTrigger>
             ))}
           </TabsList>
+
+          <TabsContent value="about" className="mt-0">
+            {aboutSection}
+          </TabsContent>
 
           <TabsContent value="projects" className="mt-0">
             {projectsSection}
