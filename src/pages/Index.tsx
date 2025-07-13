@@ -380,18 +380,18 @@ const Index = () => {
 
   // Projects Section Component
   const ProjectsSection = () => (
-    <div className="py-20 px-4">
+      <div className="py-8 md:py-20 px-2 md:px-4">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            Featured Projects
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            A collection of my most impactful and innovative development projects
-          </p>
-        </div>
+          <div className="text-center mb-8 md:mb-16">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-2 md:mb-4">
+              Featured Projects
+            </h2>
+            <p className="text-sm md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
+              A collection of my most impactful and innovative development projects
+            </p>
+          </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           {projects.map((project, index) => (
             <Card key={project.id} className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-white/80 backdrop-blur-sm border-0 shadow-lg">
               <div className="relative overflow-hidden rounded-t-lg">
@@ -450,50 +450,50 @@ const Index = () => {
 
   // Grid Posts Section Component
   const GridPostsSection = () => (
-    <div className="py-20 px-4 bg-gradient-to-r from-purple-50 to-pink-50">
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Grid3X3 className="w-8 h-8 text-purple-600" />
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800">
-              Project Gallery
-            </h2>
+      <div className="py-8 md:py-20 px-2 md:px-4 bg-gradient-to-r from-purple-50 to-pink-50">
+        <div className="container mx-auto">
+          <div className="text-center mb-8 md:mb-16">
+            <div className="flex items-center justify-center gap-2 md:gap-3 mb-2 md:mb-4">
+              <Grid3X3 className="w-6 h-6 md:w-8 md:h-8 text-purple-600" />
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-800">
+                Project Gallery
+              </h2>
+            </div>
+            <p className="text-sm md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
+              Explore my diverse portfolio through an interactive 4x4 grid showcase
+            </p>
           </div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Explore my diverse portfolio through an interactive 4x4 grid showcase
-          </p>
-        </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-4 md:gap-6">
           {gridPosts.map((post, index) => (
             <Dialog key={post.id}>
               <DialogTrigger asChild>
-                <div className="group relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                  <div className="aspect-square relative">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 className="font-bold text-sm mb-1">{post.title}</h3>
-                        <div className="flex items-center justify-between text-xs">
-                          <Badge variant="secondary" className="text-xs px-2 py-1">
-                            {post.category}
-                          </Badge>
-                          <div className="flex items-center gap-1">
-                            <Eye className="w-3 h-3" />
-                            <span>{post.views}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="absolute top-2 right-2 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <ExternalLink className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
-                </div>
+                 <div className="group relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                   <div className="aspect-square relative">
+                     <img
+                       src={post.image}
+                       alt={post.title}
+                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                     />
+                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                       <div className="absolute bottom-0 left-0 right-0 p-2 md:p-3 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                         <h3 className="font-bold text-xs md:text-sm mb-1 line-clamp-1">{post.title}</h3>
+                         <div className="flex items-center justify-between text-xs">
+                           <Badge variant="secondary" className="text-xs px-1 md:px-2 py-1 text-black">
+                             {post.category}
+                           </Badge>
+                           <div className="flex items-center gap-1">
+                             <Eye className="w-3 h-3" />
+                             <span className="text-xs">{post.views}</span>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                     <div className="absolute top-2 right-2 w-6 h-6 md:w-8 md:h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                       <ExternalLink className="w-3 h-3 md:w-4 md:h-4 text-white" />
+                     </div>
+                   </div>
+                 </div>
               </DialogTrigger>
               <DialogContent className="max-w-2xl">
                 <div className="p-4">
